@@ -5,26 +5,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        config: [
-            {year: 2019, program-files:'Program Files (x86)'},
-            {year: 2022, program-files:'Program Files'},
-        ]
-
-    runs-on: windows-${{ matrix.year }}
+  build-for-2019:
+    runs-on: windows-2019
     steps:
       - uses: actions/checkout@v3
 
       - name: Install Ninja
-        if: matrix.config.year == 2019
         shell: cmd
         run: choco install ninja
 
       - name: Generate and Build
         shell: cmd
         run: |
-          PATH=C:\${{ matrix.config.program-files }}\Microsoft Visual Studio\${{ matrix.configyear }}\Enterprise\VC\Tools\Llvm\bin;%PATH%
+          PATH=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\Llvm\bin;%PATH%
+          cmake . -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_FLAGS=-Wno-everything -fuse-ld=lld-link.exe" "-DCMAKE_CXX_CLANG_TIDY=clang-tidy;-checks=modernize-*"
+          cmake --build build --config Debug
+
+  build-for-2022:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate and Build
+        shell: cmd
+        run: |
+          PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\Llvm\bin;%PATH%
           cmake . -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_FLAGS=-Wno-everything -fuse-ld=lld-link.exe" "-DCMAKE_CXX_CLANG_TIDY=clang-tidy;-checks=modernize-*"
           cmake --build build --config Debug
