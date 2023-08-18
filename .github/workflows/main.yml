@@ -14,6 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Ninja
+        if: matrix.year == 2019
+        shell: cmd
+        run: choco install ninja
+
       - name: Generate and Build
         shell: cmd
         run: |
