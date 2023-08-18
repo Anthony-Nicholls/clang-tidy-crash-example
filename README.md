@@ -1,0 +1,1 @@
+# clang-tidy-crash-example
