@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate and Build
+        shell: cmd
+        run: |
+          PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\Llvm\bin;%PATH%
+          cmake . -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_FLAGS=-Wno-everything -fuse-ld=lld-link.exe" "-DCMAKE_CXX_CLANG_TIDY=clang-tidy;-checks=modernize-*"
+          cmake --build build --config Debug
