@@ -48,6 +48,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Ninja
+        run: brew install ninja
+
       - name: Generate and Build
         run: |
           cmake . -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_CLANG_TIDY=clang-tidy;-checks=modernize-*"
