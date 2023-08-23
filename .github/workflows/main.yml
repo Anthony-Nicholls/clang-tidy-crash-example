@@ -41,7 +41,7 @@ jobs:
       - name: Install Ninja
         run: |
           sudo apt-get update
-          sudo apt-get install ninja
+          sudo apt-get install ninja-build
 
       - name: Generate and Build
         run: |
