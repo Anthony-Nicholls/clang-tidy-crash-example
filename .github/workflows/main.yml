@@ -22,21 +22,19 @@ jobs:
           windows-2022,
           ubuntu-latest
         ]
+        include:
+          - runner: windows-2019
+            clang-tidy: C:\Program Files (x86)\Microsoft Visual Studio\2019\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
+
+          - runner: windows-2022
+            clang-tidy: C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
+
+          - runner: ubuntu-latest
+            clang-tidy: clang-tidy
 
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v3
-
-      - name: windows-2019 setup
-        if: matrix.runner == 'windows-2019'
-        shell: cmd
-        run: echo "C:\Program Files (x86)\Microsoft Visual Studio\2019\\Enterprise\VC\Tools\Llvm\bin" >> $GITHUB_PATH
-
-      - name: windows-2022 setup
-        if: matrix.runner == 'windows-2022'
-        shell: cmd
-        run: echo "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\Llvm\bin" >> $GITHUB_PATH
-
       - name: Run clang-tidy
         shell: bash
-        run: clang-tidy --checks="${{ matrix.check }}" main.cpp
+        run: ${{ matrix.clang-tidy }} --checks="${{ matrix.check }}" main.cpp --
