@@ -10,12 +10,6 @@ jobs:
       fail-fast: false
       matrix:
         check: [
-          # 'clang-*',
-          # 'bugprone-*',
-          # 'cppcoreguidelines-*',
-          # 'modernize-*',
-          # 'performance-*',
-          # 'readability-*',
           modernize-avoid-bind,
           modernize-avoid-c-arrays
           modernize-concat-nested-namespaces,
@@ -53,19 +47,13 @@ jobs:
           modernize-use-using
         ]
         runner: [
-          # windows-2019,
-          windows-2022,
-          # ubuntu-latest
+          windows-latest,
+          ubuntu-latest
         ]
+        clang-tidy: [clang-tidy]
         include:
-          # - runner: windows-2019
-          #   clang-tidy: C:\Program Files (x86)\Microsoft Visual Studio\2019\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
-
-          - runner: windows-2022
-            clang-tidy: clang-tidy
-
-          # - runner: ubuntu-latest
-          #   clang-tidy: clang-tidy
+          - runner: windows-latest
+            clang-tidy: C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
 
     runs-on: ${{ matrix.runner }}
     steps:
