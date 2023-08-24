@@ -62,7 +62,7 @@ jobs:
           #   clang-tidy: C:\Program Files (x86)\Microsoft Visual Studio\2019\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
 
           - runner: windows-2022
-            clang-tidy: C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
+            clang-tidy: clang-tidy
 
           # - runner: ubuntu-latest
           #   clang-tidy: clang-tidy
