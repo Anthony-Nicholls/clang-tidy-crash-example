@@ -15,8 +15,8 @@ jobs:
 
       - shell: bash
         run: |
-          "C:\Program Files\LLVM\bin\clang-tidy" --version
-          "C:\Program Files\LLVM\bin\clang-tidy" --checks="-*,modernize-use-nullptr" main.cpp --
+          clang-tidy --version
+          clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --
 
   windows-gha-bundled-llvm:
     runs-on: windows-latest
