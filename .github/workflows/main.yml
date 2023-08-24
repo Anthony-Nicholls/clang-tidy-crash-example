@@ -5,6 +5,18 @@ on:
   workflow_dispatch:
 
 jobs:
+  windows-install-latest-llvm:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - shell: bash
+        run: choco install llvm
+
+      - shell: bash
+        run: |
+          "C:\Program Files\LLVM\bin\clang-tidy" --version
+          "C:\Program Files\LLVM\bin\clang-tidy" --checks="-*,modernize-use-nullptr" main.cpp --
+
   windows-gha-bundled-llvm:
     runs-on: windows-latest
     steps:
