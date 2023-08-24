@@ -21,18 +21,11 @@ jobs:
           windows-2019,
           windows-2022,
           ubunntu-latest,
-          macos-latest
         ]
 
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v3
-
-      - name: macos setup
-        if: runner.os == 'macOS'
-        run: |
-          brew install llvm
-          ln -s "$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
 
       - name: windows-2019 setup
         if: matrix.runner == 'windows-2019'
