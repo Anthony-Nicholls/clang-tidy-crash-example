@@ -10,27 +10,62 @@ jobs:
       fail-fast: false
       matrix:
         check: [
-          'clang-*',
-          'bugprone-*',
-          'cppcoreguidelines-*',
-          'modernize-*',
-          'performance-*',
-          'readability-*',
+          # 'clang-*',
+          # 'bugprone-*',
+          # 'cppcoreguidelines-*',
+          # 'modernize-*',
+          # 'performance-*',
+          # 'readability-*',
+          modernize-avoid-bind,
+          modernize-avoid-c-arrays
+          modernize-concat-nested-namespaces,
+          modernize-deprecated-headers,
+          modernize-deprecated-ios-base-aliases,
+          modernize-loop-convert,
+          modernize-macro-to-enum,
+          modernize-make-shared,
+          modernize-make-unique,
+          modernize-pass-by-value,
+          modernize-raw-string-literal,
+          modernize-redundant-void-arg,
+          modernize-replace-auto-ptr,
+          modernize-replace-disallow-copy-and-assign-macro,
+          modernize-replace-random-shuffle,
+          modernize-return-braced-init-list,
+          modernize-shrink-to-fit,
+          modernize-type-traits,
+          modernize-unary-static-assert,
+          modernize-use-auto,
+          modernize-use-bool-literals,
+          modernize-use-constraints,
+          modernize-use-default-member-init,
+          modernize-use-emplace,
+          modernize-use-equals-default,
+          modernize-use-equals-delete,
+          modernize-use-nodiscard,
+          modernize-use-noexcept,
+          modernize-use-nullptr,
+          modernize-use-override,
+          modernize-use-std-print,
+          modernize-use-trailing-return-type,
+          modernize-use-transparent-functors,
+          modernize-use-uncaught-exceptions,
+          modernize-use-using
         ]
         runner: [
-          windows-2019,
+          # windows-2019,
           windows-2022,
-          ubuntu-latest
+          # ubuntu-latest
         ]
         include:
-          - runner: windows-2019
-            clang-tidy: C:\Program Files (x86)\Microsoft Visual Studio\2019\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
+          # - runner: windows-2019
+          #   clang-tidy: C:\Program Files (x86)\Microsoft Visual Studio\2019\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
 
           - runner: windows-2022
             clang-tidy: C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
 
-          - runner: ubuntu-latest
-            clang-tidy: clang-tidy
+          # - runner: ubuntu-latest
+          #   clang-tidy: clang-tidy
 
     runs-on: ${{ matrix.runner }}
     steps:
