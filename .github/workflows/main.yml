@@ -5,28 +5,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  clang-tidy:
-    strategy:
-      fail-fast: false
-      matrix:
-        check: [
-          modernize-use-nullptr
-        ]
-        runner: [
-          windows-latest,
-          ubuntu-latest
-        ]
-        clang-tidy: [
-          'clang-tidy',
-          'C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy'
-        ]
-        exclude:
-          - runner: ubuntu-latest
-            clang-tidy: C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
-
-    runs-on: ${{ matrix.runner }}
+  windows-2022-installed-llvm:
+    runs-on: 'windows-2022'
     steps:
       - uses: actions/checkout@v3
       - name: Run clang-tidy
         shell: bash
-        run: '"${{ matrix.clang-tidy }}" --checks="${{ matrix.check }}" main.cpp --'
+        run: 'clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --'
+
+  windows-2022-vs-llvm:
+    runs-on: 'windows-2022'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run clang-tidy
+        shell: bash
+        run: '"C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --checks="-*,modernize-use-nullptr" main.cpp --'
+
+  ubuntu-installed-llvm:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run clang-tidy
+        shell: bash
+        run: 'clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --'
