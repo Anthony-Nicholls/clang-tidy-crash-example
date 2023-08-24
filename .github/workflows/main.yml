@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - shell: bash
-        run: choco install llvm
+        run: |
+          choco upgrade chocolatey
+          choco install llvm
 
       - shell: bash
         run: |
