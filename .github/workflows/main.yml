@@ -10,17 +10,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - shell: bash
-        run: 'clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --'
+        run: |
+          'clang-tidy --version'
+          'clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --'
 
   windows-vs-bundled-llvm:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - shell: bash
-        run: '"C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --checks="-*,modernize-use-nullptr" main.cpp --'
+        run:  |
+          '"C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --version'
+          '"C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --checks="-*,modernize-use-nullptr" main.cpp --'
 
   ubuntu-gha-bundled-llvm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: 'clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --'
+      - run: |
+          'clang-tidy --version'
+          'clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --'
