@@ -9,62 +9,40 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install Ninja
-        shell: cmd
-        run: choco install ninja
-
-      - name: Generate and Build
+      - name: Run clang-tidy
         shell: cmd
         run: |
           PATH=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\Llvm\bin;%PATH%
-          cmake . -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_CLANG_TIDY=clang-tidy;-checks=modernize-*"
-          cmake --build build --config Debug
+          clang-tidy -checks=modernize-* main.cpp
 
   build-for-2022:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
-
-      - name: Generate and Build
+      - name: Run clang-tidy
         shell: cmd
         run: |
           PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\Llvm\bin;%PATH%
-          cmake . -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_CLANG_TIDY=clang-tidy;-checks=modernize-*"
-          cmake --build build --config Debug
+          clang-tidy -checks=modernize-* main.cpp
 
   build-for-ubuntu-latest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install Ninja
+      - name: Run clang-tidy
         run: |
-          sudo apt-get update
-          sudo apt-get install ninja-build
-
-      - name: Generate and Build
-        run: |
-          cmake . -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_CLANG_TIDY=clang-tidy;-checks=modernize-*"
-          cmake --build build --config Debug
+          clang-tidy -checks=modernize-* main.cpp
 
   build-for-macos-latest:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install Ninja
-        run: |
-          brew update
-          brew install ninja
-
       - name: Install clang-tidy
         run: |
           brew install llvm
           ln -s "$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
 
-      - name: Generate and Build
+      - name: Run claang-tidy
         run: |
-          cmake . -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_CLANG_TIDY=clang-tidy;-checks=modernize-*"
-          cmake --build build --config Debug
+          clang-tidy -checks=modernize-* main.cpp
 
