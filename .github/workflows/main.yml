@@ -39,4 +39,4 @@ jobs:
 
       - name: Run clang-tidy
         shell: bash
-        run: clang-tidy --checks="-*,${{ matrix.check }}" main.cpp --
+        run: clang-tidy --checks="${{ matrix.check }}" main.cpp
