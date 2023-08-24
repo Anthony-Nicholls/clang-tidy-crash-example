@@ -50,7 +50,10 @@ jobs:
           windows-latest,
           ubuntu-latest
         ]
-        clang-tidy: [clang-tidy, C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy]
+        clang-tidy: [
+          'clang-tidy',
+          'C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy'
+        ]
         exclude:
           - runner: ubuntu-latest
             clang-tidy: C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy
