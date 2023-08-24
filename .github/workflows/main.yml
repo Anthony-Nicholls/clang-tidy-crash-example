@@ -20,7 +20,7 @@ jobs:
         runner: [
           windows-2019,
           windows-2022,
-          ubunntu-latest,
+          ubuntu-latest
         ]
 
     runs-on: ${{ matrix.runner }}
