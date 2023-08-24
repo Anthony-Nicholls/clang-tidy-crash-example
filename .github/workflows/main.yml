@@ -16,14 +16,24 @@ jobs:
           clang-tidy main.cpp --
 
   windows-2022:
-    runs-on: windows-2022
+    strategy:
+      matrix:
+        check: [
+          'clang*',
+          'bugprone*',
+          'cppcoreguidelines*',
+          'modernize*',
+          'performance*',
+          'readability*',
+        ]
+    runs-on: windows-2022 (${{ matrix.check }})
     steps:
       - uses: actions/checkout@v3
       - name: Run clang-tidy
         shell: cmd
         run: |
           PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\Llvm\bin;%PATH%
-          clang-tidy main.cpp --
+          clang-tidy main.cpp -- --checks="-*,${{ matrix.check }}"
 
   ubuntu-latest:
     runs-on: ubuntu-latest
