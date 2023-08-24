@@ -19,14 +19,14 @@ jobs:
     strategy:
       matrix:
         check: [
-          'clang*',
-          'bugprone*',
-          'cppcoreguidelines*',
-          'modernize*',
-          'performance*',
-          'readability*',
+          'clang-*',
+          'bugprone-*',
+          'cppcoreguidelines-*',
+          'modernize-*',
+          'performance-*',
+          'readability-*',
         ]
-    runs-on: windows-2022 (${{ matrix.check }})
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
       - name: Run clang-tidy
