@@ -5,21 +5,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  windows-2022-installed-llvm:
-    runs-on: windows-2022
+  windows-gha-bundled-llvm:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - shell: bash
         run: 'clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --'
 
-  windows-2022-vs-llvm:
-    runs-on: windows-2022
+  windows-vs-bundled-llvm:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - shell: bash
         run: '"C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --checks="-*,modernize-use-nullptr" main.cpp --'
 
-  ubuntu-installed-llvm:
+  ubuntu-gha-bundled-llvm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
