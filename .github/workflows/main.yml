@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  windows-install-llvm-version:
+  windows-choco-llvm:
     strategy:
       fail-fast: false
       matrix:
@@ -19,8 +19,7 @@ jobs:
           16.0.3,
           16.0.4,
           16.0.5,
-          16.0.6,
-
+          16.0.6
         ]
     runs-on: windows-latest
     steps:
@@ -34,7 +33,7 @@ jobs:
           clang-tidy --version
           clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --
 
-  windows-gha-bundled-llvm:
+  windows-gha-llvm:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -43,8 +42,8 @@ jobs:
           clang-tidy --version
           clang-tidy --checks="-*,modernize-use-nullptr" main.cpp --
 
-  windows-vs-bundled-llvm:
-    runs-on: windows-latest
+  windows-vs2022-llvm:
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
       - shell: bash
