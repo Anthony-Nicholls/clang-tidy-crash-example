@@ -52,7 +52,16 @@ jobs:
           "C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --version
           "C:\Program Files\Microsoft Visual Studio\2022\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --checks="-*,modernize-use-nullptr" main.cpp --
 
-  ubuntu-gha-bundled-llvm:
+  windows-vs2019-llvm:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v3
+      - shell: bash
+        run:  |
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --version
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\\Enterprise\VC\Tools\Llvm\bin\clang-tidy" --checks="-*,modernize-use-nullptr" main.cpp --
+
+  ubuntu-gha-llvm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
